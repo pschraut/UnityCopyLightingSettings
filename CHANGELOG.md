@@ -17,5 +17,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
  - Fixed compile error when using Unity 2018.2
 
-## [1.0.0] - 2018-05-26
+## [1.0.0] - 2017-10-30
  - First public release
