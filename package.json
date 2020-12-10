@@ -1,8 +1,8 @@
 {
   "name": "com.oddworm.copylightingsettings",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "displayName": "Copy Lighting Settings",
-  "description": "This package adds functionality to let you copy and paste lighting settings from one scene to another.",
+  "description": "This package adds functionality to copy and paste lighting settings from one scene to another.\n\nPlease find it in the Unity main menu under 'Window > Rendering'.",
   "unity": "2017.4",
   "documentationUrl": "https://github.com/pschraut/UnityCopyLightingSettings",
   "dependencies": {

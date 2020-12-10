@@ -1,6 +1,6 @@
 # Copy Lighting Settings for Unity
 
-The "Copy Lighting Settings" package allows you, as the name might suggest, to copy&paste lighting settings from one scene to another.
+The "Copy Lighting Settings" package allows you to copy&paste lighting settings from one scene to another.
 
 The need for this functionality is based on an Unity [forum thread](https://forum.unity.com/threads/copy-lighting-settings-from-scene-to-scene.308634/), where several community members wonder how to transfer the lighting settings from one scene to another.
 
@@ -8,12 +8,13 @@ I found this to be an interesting problem to solve and thus looked into it. In t
 
 [![](http://img.youtube.com/vi/-TQzrVn1kWM/0.jpg)](https://youtu.be/-TQzrVn1kWM "")
 
-This package is only interesting if you use Unity 2019.4 and older versions. Unity Technologies improved the lighting workflow in Unity 2020.1, here is a quote from their release notes:
+As of Unity 2020.1, Unity Technologies improved the lighting workflow, here is a quote from their release notes:
 > GI: Added all lightmap settings as an asset. This will allow the user to share them between scenes or switch them out in an easy way.
 https://unity3d.com/unity/alpha/2020.1.0a14
 
+While they moved all lightmap settings to that asset, there are still some settings stored in the scene. The "Environment" settings for example. In 2020.1 and newer, this package copies the reference to the lighting settings asset and all the other settings that remained in the scene (except for the 'Sun' setting, because Unity doesn't allow references to objects from one scene in another).
 
-# Installation in Unity 2019.3 and 2019.4
+# Installation in Unity 2019.3 and newer
 
 In Unity's Package Manager, choose "Add package from git URL" and insert one of the Package URL's you can find below.
 
@@ -21,6 +22,7 @@ In Unity's Package Manager, choose "Add package from git URL" and insert one of 
 
 | Version  |     Link      |
 |----------|---------------|
+| 1.4.0 | https://github.com/pschraut/UnityCopyLightingSettings.git#1.4.0 |
 | 1.3.0 | https://github.com/pschraut/UnityCopyLightingSettings.git#1.3.0 |
 
 
@@ -28,4 +30,4 @@ In Unity's Package Manager, choose "Add package from git URL" and insert one of 
 
 If you use an older Unity version than 2019.3, the Package Manager might not exist or might not have git support yet.
 
-In this case, I believe the easiest way is to only download the `Editor/CopyLightingSettings.cs` file from this repository and save it in your project under `Assets/Editor/CopyLightingSettings.cs`.
+In this case, I believe the easiest way is to download the `Editor/CopyLightingSettings.cs` file from this repository and save it in your project under `Assets/Editor/CopyLightingSettings.cs`.

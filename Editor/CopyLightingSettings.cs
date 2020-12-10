@@ -2,21 +2,10 @@
 // Copy Lighting Settings Utility. Copyright (c) 2017-2020 Peter Schraut (www.console-dev.de). See LICENSE.md
 // https://github.com/pschraut/UnityCopyLightingSettings
 //
+#pragma warning disable IDE0018 // Visual Studio: Inline variable declaration
+#pragma warning disable IDE0051 // Visual Studio: Remove unused private members
 
-//
-// This Unity editor extension allows you to copy & paste lighting settings from one scene to another.
-// This editor extension is meant to be used with Unity 2019.4 and older, because starting with Unity 2020.1,
-// lighting settings are stored in assets and can be shared among different scenes, making this editor extension irrelevant.
-//
-// Please take a look at the following video:
-//   https://youtu.be/-TQzrVn1kWM
-//
-// If you use Unity 2019.3 and newer, you can install this package through the Unity Package Manager.
-// If you use an older version than 2019.3, the easiest way is probably just save this file to your
-// project as: "Assets/Editor/CopyLightingSettings.cs"
-//
-
-#if UNITY_EDITOR && !UNITY_2020_1_OR_NEWER
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;

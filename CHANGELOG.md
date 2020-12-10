@@ -4,6 +4,10 @@ All notable changes to this package are documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
  
+## [1.4.0] - 2020-12-10
+### Added
+ - Support for Unity 2020.1 and newer. In 1.3.0 I removed Unity 2020 support on purpose, because they added the "Lighting Settings" asset. However, there are still some settings that have not been moved to the new lighting settings asset (see [this forum post](https://forum.unity.com/threads/copy-lighting-settings-from-scene-to-scene.308634/page-2#post-6606286)). This this package is still relevant, even for Unity 2020 and newer. This package copies the "Lighting Settings" asset reference and the "Environment" settings which are still part of the scene.
+
 ## [1.3.0] - 2020-07-05
 ### Added
  - Availability as an Unity package.
