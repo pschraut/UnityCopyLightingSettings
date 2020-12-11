@@ -17,6 +17,7 @@ namespace Oddworm.EditorFramework
     {
         static SerializedObject s_SourceLightmapSettings = default;
         static SerializedObject s_SourceRenderSettings = default;
+        static string s_SourceSunName = "";
 
 #if UNITY_2018_2_OR_NEWER
         const string k_CopySettingsMenuPath = "Window/Rendering/Copy Lighting Settings";
@@ -41,6 +42,12 @@ namespace Oddworm.EditorFramework
 
             s_SourceLightmapSettings = new SerializedObject(lightmapSettings);
             s_SourceRenderSettings = new SerializedObject(renderSettings);
+
+            // Get the sun name
+            s_SourceSunName = "";
+            var sunProperty = s_SourceRenderSettings.FindProperty("m_Sun");
+            if (sunProperty != null && sunProperty.objectReferenceValue != null)
+                s_SourceSunName = sunProperty.objectReferenceValue.name;
         }
 
         [MenuItem(k_PasteSettingsMenuPath, priority = 201)]
@@ -55,9 +62,64 @@ namespace Oddworm.EditorFramework
                 return;
 
             CopyInternal(s_SourceLightmapSettings, new SerializedObject(lightmapSettings));
-            CopyInternal(s_SourceRenderSettings, new SerializedObject(renderSettings));
+
+            var targetRenderSettings = new SerializedObject(renderSettings);
+            CopyInternal(s_SourceRenderSettings, targetRenderSettings);
+
+            var sunProperty = targetRenderSettings.FindProperty("m_Sun");
+            TryConnectSunSource(sunProperty, s_SourceSunName);
 
             UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
+        }
+
+        static void TryConnectSunSource(SerializedProperty sunProperty, string sunName)
+        {
+            if (sunProperty == null)
+                return;
+
+            if (sunProperty.objectReferenceValue != null)
+                return; // don't set sun if it's assigned already
+
+            if (string.IsNullOrEmpty(sunName))
+                return;
+
+            var activeScene = EditorSceneManager.GetActiveScene();
+            Light sunLight = null;
+
+            // Try to find an active sun first
+            foreach (var light in Light.FindObjectsOfType<Light>(false))
+            {
+                if (!string.Equals(light.name, sunName, System.StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                if (light.gameObject.scene != activeScene)
+                    continue;
+
+                sunLight = light;
+                break;
+            }
+
+            // If no active sun was found, consider inactive as well
+            if (sunLight == null)
+            {
+                foreach (var light in Light.FindObjectsOfType<Light>(true))
+                {
+                    if (!string.Equals(light.name, s_SourceSunName, System.StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    if (light.gameObject.scene != activeScene)
+                        continue;
+
+                    sunLight = light;
+                    break;
+                }
+            }
+
+            if (sunLight != null)
+            {
+                sunProperty.objectReferenceValue = sunLight;
+                sunProperty.serializedObject.ApplyModifiedProperties();
+            }
         }
 
         [MenuItem(k_PasteSettingsAllMenuPath, priority = 202)]

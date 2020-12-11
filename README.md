@@ -8,11 +8,19 @@ I found this to be an interesting problem to solve and thus looked into it. In t
 
 [![](http://img.youtube.com/vi/-TQzrVn1kWM/0.jpg)](https://youtu.be/-TQzrVn1kWM "")
 
-As of Unity 2020.1, Unity Technologies improved the lighting workflow, here is a quote from their release notes:
-> GI: Added all lightmap settings as an asset. This will allow the user to share them between scenes or switch them out in an easy way.
-https://unity3d.com/unity/alpha/2020.1.0a14
+# How it works
 
-While they moved all lightmap settings to that asset, there are still some settings stored in the scene. The "Environment" settings for example. In 2020.1 and newer, this package copies the reference to the lighting settings asset and all the other settings that remained in the scene (except for the 'Sun' setting, because Unity doesn't allow references to objects from one scene in another).
+Copying the "Sun Source" setting is a special case that is explained below, 
+all other settings are just copied as you would expect.
+
+"Sun Source" is a reference to a Light Component in the scene, 
+but Unity does not support cross scene references. 
+Therefore the tool does not copy&paste the reference, 
+but it looks for a Light with the same name (upper/lower-case ignored) in the target scene.
+It looks first for active lights, then inactive lights.
+
+If a Light with the same name exists in the target scene and there is 
+currently no "Sun Source" assigned, then the tool sets it to the Light found in that scene.
 
 # Installation in Unity 2019.3 and newer
 
@@ -22,6 +30,7 @@ In Unity's Package Manager, choose "Add package from git URL" and insert one of 
 
 | Version  |     Link      |
 |----------|---------------|
+| 1.5.0 | https://github.com/pschraut/UnityCopyLightingSettings.git#1.5.0 |
 | 1.4.0 | https://github.com/pschraut/UnityCopyLightingSettings.git#1.4.0 |
 | 1.3.0 | https://github.com/pschraut/UnityCopyLightingSettings.git#1.3.0 |
 
