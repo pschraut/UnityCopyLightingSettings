@@ -87,8 +87,11 @@ namespace Oddworm.EditorFramework
             Light sunLight = null;
 
             // Try to find an active sun first
-            foreach (var light in Light.FindObjectsOfType<Light>(false))
+            foreach (var light in Resources.FindObjectsOfTypeAll<Light>())
             {
+                if (!light.enabled)
+                    continue;
+
                 if (!string.Equals(light.name, sunName, System.StringComparison.OrdinalIgnoreCase))
                     continue;
 
@@ -102,7 +105,7 @@ namespace Oddworm.EditorFramework
             // If no active sun was found, consider inactive as well
             if (sunLight == null)
             {
-                foreach (var light in Light.FindObjectsOfType<Light>(true))
+                foreach (var light in Resources.FindObjectsOfTypeAll<Light>())
                 {
                     if (!string.Equals(light.name, s_SourceSunName, System.StringComparison.OrdinalIgnoreCase))
                         continue;
