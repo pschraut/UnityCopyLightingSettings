@@ -41,3 +41,8 @@ In Unity's Package Manager, choose "Add package from git URL" and insert one of 
 If you use an older Unity version than 2019.3, the Package Manager might not exist or might not have git support yet.
 
 In this case, I believe the easiest way is to download the `Editor/CopyLightingSettings.cs` file from this repository and save it in your project under `Assets/Editor/CopyLightingSettings.cs`.
+
+# Credits
+
+If you find this package useful, please mention my name in your credits screen.
+Something like "CopyLightingSettings by Peter Schraut" or "Thanks to Peter Schraut" would be very much appreciated.
