@@ -1,5 +1,5 @@
 //
-// Copy Lighting Settings Utility. Copyright (c) 2017-2020 Peter Schraut (www.console-dev.de). See LICENSE.md
+// Copy Lighting Settings Utility. Copyright (c) 2017-2022 Peter Schraut (www.console-dev.de). See LICENSE.md
 // https://github.com/pschraut/UnityCopyLightingSettings
 //
 #pragma warning disable IDE0018 // Visual Studio: Inline variable declaration
